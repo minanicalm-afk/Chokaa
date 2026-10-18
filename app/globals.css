@@ -3,25 +3,136 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --ivory: #f7f3ec;
+  --charcoal: #1f1d1b;
+  --terracotta: #b5623c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--ivory);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  background: var(--ivory);
+  color: var(--charcoal);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Paper grain. Fixed, click-through, about 3% so the canvas feels printed. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("/grain.svg");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  mix-blend-mode: multiply;
+}
+
+::selection {
+  background: var(--terracotta);
+  color: var(--ivory);
+}
+
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16;
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  /* Metadata only — location, year, sheet labels. */
+  .meta {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+    font-variant-caps: all-small-caps;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 70;
+    transform: translateY(-150%);
+    background: var(--ivory);
+    color: var(--charcoal);
+    padding: 0.5rem 0.75rem;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rise {
+  animation: rise 500ms ease-out both;
+}
+
+.rule-draw {
+  transform-origin: left center;
+  animation: draw 600ms ease-out 180ms both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
   }
 }
