@@ -22,7 +22,7 @@ export function ProjectCard({
     <article className="group">
       <Link href={`/work/${project.slug}`} className="block">
         <div
-          className={`relative overflow-hidden border border-limestone ${large ? "aspect-[3/2]" : "aspect-[4/3]"}`}
+          className={`relative overflow-hidden rounded-2xl border border-limestone ${large ? "aspect-[3/2]" : "aspect-[4/3]"}`}
         >
           {project.coverImage ? (
             <Image

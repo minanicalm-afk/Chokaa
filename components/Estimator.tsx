@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { estimatorChoices, type EstimatorType } from "@/lib/estimator";
 import { fieldErrors, estimatorSchema } from "@/lib/validation";
 
@@ -55,7 +56,7 @@ export function Estimator() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="border border-limestone p-6 md:p-8" noValidate>
+    <form onSubmit={onSubmit} className="rounded-2xl border border-limestone p-6 md:p-8" noValidate>
       <p className="meta text-muted">Rough cost estimator</p>
       <h3 className="mt-3 font-display text-3xl tracking-tight">An indicative band, not a tender.</h3>
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -68,10 +69,10 @@ export function Estimator() {
               setProjectType(item.value);
               setResult(null);
             }}
-            className={`border px-4 py-4 text-left text-sm ${
+            className={`rounded-2xl border px-4 py-4 text-left text-sm ${
               projectType === item.value
-                ? "border-terracotta bg-charcoal text-ivory"
-                : "border-limestone"
+                ? "border-charcoal bg-charcoal text-ivory"
+                : "border-limestone bg-white hover:border-charcoal"
             }`}
           >
             {item.label}
@@ -88,7 +89,7 @@ export function Estimator() {
           inputMode="numeric"
           value={quantity}
           onChange={(event) => setQuantity(event.target.value)}
-          className={`mt-2 w-full border bg-transparent px-3 py-3 text-base outline-none ${errors.quantity ? "border-terracotta" : "border-limestone"}`}
+          className={`field mt-2 ${errors.quantity ? "border-terracotta" : ""}`}
         />
         {errors.quantity ? <span className="mt-1 block text-sm text-charcoal">{errors.quantity}</span> : null}
       </label>
@@ -96,19 +97,20 @@ export function Estimator() {
       <div className="mt-8 grid gap-5 md:grid-cols-2">
         <label className="block">
           <span className="meta text-muted">Name, if you want us to keep it</span>
-          <input value={name} onChange={(event) => setName(event.target.value)} className="mt-2 w-full border border-limestone bg-transparent px-3 py-3 outline-none" />
+          <input value={name} onChange={(event) => setName(event.target.value)} className="field mt-2" />
         </label>
         <label className="block">
           <span className="meta text-muted">Phone, optional</span>
-          <input value={phone} onChange={(event) => setPhone(event.target.value)} className={`mt-2 w-full border bg-transparent px-3 py-3 outline-none ${errors.phone ? "border-terracotta" : "border-limestone"}`} />
+          <input value={phone} onChange={(event) => setPhone(event.target.value)} className={`field mt-2 ${errors.phone ? "border-terracotta" : ""}`} />
           {errors.phone ? <span className="mt-1 block text-sm text-charcoal">{errors.phone}</span> : null}
         </label>
       </div>
 
       {formError ? <p className="mt-4 text-sm text-charcoal">{formError}</p> : null}
 
-      <button type="submit" disabled={pending} className="mt-8 bg-charcoal px-5 py-3 text-sm text-ivory disabled:opacity-60">
+      <button type="submit" disabled={pending} className="btn-primary mt-8">
         {pending ? "Calculating…" : "Show the band"}
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </button>
 
       {result ? (

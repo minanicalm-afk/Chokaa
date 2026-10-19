@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MpesaPayButton } from "@/components/MpesaPayButton";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { QuoteForm } from "@/components/QuoteForm";
 import { site, telHref, whatsappHref } from "@/content/site";
 
@@ -43,15 +44,17 @@ export default function ContactPage() {
                 </a>
               </address>
             </div>
-            <a href={whatsappHref()} className="block border border-limestone p-6">
-              <p className="meta text-muted">WhatsApp</p>
-              <p className="mt-3 font-display text-3xl tracking-tight">Most clients start on WhatsApp.</p>
-              <p className="mt-3 text-sm underline decoration-terracotta underline-offset-4">Message us</p>
+            <a href={whatsappHref()} className="block rounded-2xl border border-limestone p-6 transition-colors hover:border-charcoal">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-charcoal text-ivory">
+                <WhatsAppIcon className="h-5 w-5" />
+              </span>
+              <p className="mt-4 font-display text-2xl tracking-tight">Most clients start on WhatsApp.</p>
+              <p className="mt-2 text-sm font-medium">Message us</p>
             </a>
             <iframe
               title="Map showing the studio in Westlands, Nairobi"
               src={site.mapEmbedUrl}
-              className="h-72 w-full border border-limestone"
+              className="h-72 w-full rounded-2xl border border-limestone"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

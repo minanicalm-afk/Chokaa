@@ -1,77 +1,71 @@
 import Link from "next/link";
-import { credentialLine, site, telHref } from "@/content/site";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import { site, telHref } from "@/content/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-limestone pb-20">
-      <div className="shell py-16 md:py-20">
+    <footer className="border-t border-limestone bg-white pb-24">
+      <div className="shell py-14 md:py-16">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <p className="font-display text-3xl tracking-tight">{site.name}</p>
-            <p className="mt-4 max-w-sm text-base leading-relaxed text-muted">
-              {site.description}
-            </p>
-            <p className="meta mt-6 text-muted">{site.counties.join(" · ")}</p>
+            <p className="font-display text-xl font-semibold tracking-tight">{site.name}</p>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">{site.description}</p>
+            <Link href="/contact" className="btn-primary mt-6">
+              Request a quote
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
 
           <div className="md:col-span-3">
-            <p className="meta text-muted">Studio</p>
-            <address className="mt-4 not-italic text-base leading-relaxed">
-              {site.address.line1}
-              <br />
-              {site.address.area}, {site.address.city}
-              <br />
-              <a href={telHref()} className="underline decoration-limestone underline-offset-4 hover:decoration-terracotta">
-                {site.phone.display}
-              </a>
-              <br />
-              <a
-                href={`mailto:${site.email}`}
-                className="underline decoration-limestone underline-offset-4 hover:decoration-terracotta"
-              >
-                {site.email}
-              </a>
-            </address>
+            <p className="text-sm font-medium">Visit</p>
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed">
+              <li className="flex gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
+                <span>
+                  {site.address.line1}
+                  <br />
+                  {site.address.area}, {site.address.city}
+                </span>
+              </li>
+              <li>
+                <a href={telHref()} className="inline-flex items-center gap-2.5 hover:underline">
+                  <Phone className="h-4 w-4 text-muted" aria-hidden="true" />
+                  {site.phone.display}
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2.5 hover:underline">
+                  <Mail className="h-4 w-4 text-muted" aria-hidden="true" />
+                  {site.email}
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div className="md:col-span-4">
-            <p className="meta text-muted">Register</p>
-            <ul className="mt-4 space-y-1 text-base leading-relaxed">
-              {credentialLine.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-            <p className="mt-4 text-sm leading-relaxed text-muted">
-              {site.nca.category}. {site.compliance.kra}.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-14 border-t border-ochre pt-6">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-            <nav aria-label="Footer" className="flex flex-wrap gap-x-6 gap-y-2">
+            <p className="text-sm font-medium">Explore</p>
+            <nav aria-label="Footer" className="mt-4 grid grid-cols-2 gap-y-2.5 text-sm">
               {site.nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm text-charcoal underline decoration-transparent decoration-1 underline-offset-4 hover:decoration-terracotta"
-                >
+                <Link key={item.href} href={item.href} className="text-muted hover:text-charcoal">
                   {item.label}
                 </Link>
               ))}
-              <Link
-                href="/contact"
-                className="text-sm text-charcoal underline decoration-transparent decoration-1 underline-offset-4 hover:decoration-terracotta"
-              >
+              <Link href="/contact" className="text-muted hover:text-charcoal">
                 Contact
               </Link>
             </nav>
-            <p className="text-sm text-muted">
-              © {year} {site.legalName}
-            </p>
           </div>
+        </div>
+
+        <div className="mt-12 flex flex-col gap-2 border-t border-limestone pt-6 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} {site.legalName}
+          </p>
+          <p>
+            {site.nca.number} · {site.counties.join(" · ")}
+          </p>
         </div>
       </div>
     </footer>

@@ -120,10 +120,10 @@ function FilterButton({
       type="button"
       aria-pressed={active}
       onClick={onClick}
-      className={`border px-3 py-1.5 text-sm transition-colors duration-200 ${
+      className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors duration-200 ${
         active
-          ? "border-terracotta bg-charcoal text-ivory"
-          : "border-limestone bg-transparent text-charcoal hover:border-charcoal"
+          ? "border-charcoal bg-charcoal text-ivory"
+          : "border-limestone bg-white text-charcoal hover:border-charcoal"
       }`}
     >
       {children}

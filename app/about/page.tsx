@@ -20,7 +20,7 @@ export default function AboutPage() {
       </header>
 
       <div className="shell">
-        <div className="relative aspect-[16/7] border border-limestone">
+        <div className="relative aspect-[16/7] overflow-hidden rounded-2xl border border-limestone">
           <Image
             src="/images/site-foundation.jpg"
             alt={altFor("/images/site-foundation.jpg", "Foundation ready for concrete")}
@@ -43,7 +43,7 @@ export default function AboutPage() {
               The practice is ordinary and, we think, too rare: a scope before a price, a programme before a start date, and a named person on site. Variations are priced before they are built. Retention has a date. If we are the wrong size of firm for the work, we say so at the first meeting.
             </p>
           </div>
-          <div className="relative aspect-[4/5] border border-limestone lg:col-span-4 lg:col-start-9">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-limestone lg:col-span-4 lg:col-start-9">
             <Image
               src="/images/masonry-detail.jpg"
               alt={altFor("/images/masonry-detail.jpg", "Stone and plaster detail")}

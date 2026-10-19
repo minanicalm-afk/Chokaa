@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: { params: Params }) {
       </header>
 
       <div className="shell">
-        <div className="relative aspect-[16/8] border border-limestone">
+        <div className="relative aspect-[16/8] overflow-hidden rounded-2xl border border-limestone">
           <Image
             src={image}
             alt={altFor(image, service.name)}

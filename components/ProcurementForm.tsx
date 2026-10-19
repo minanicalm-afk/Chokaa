@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { site, whatsappHref } from "@/content/site";
 import { fieldErrors, procurementSchema } from "@/lib/validation";
 
@@ -50,7 +51,7 @@ export function ProcurementForm() {
 
   if (done) {
     return (
-      <div className="border border-limestone p-6">
+      <div className="rounded-2xl border border-limestone p-6">
         <p className="font-display text-3xl tracking-tight">Asante. The bid pack will go out within one business day.</p>
         <a href={whatsappHref()} className="mt-6 inline-block text-sm underline decoration-terracotta underline-offset-4">
           Or message {site.name}
@@ -66,7 +67,7 @@ export function ProcurementForm() {
         type={type}
         value={values[key]}
         onChange={(event) => setValues((current) => ({ ...current, [key]: event.target.value }))}
-        className={`mt-2 w-full border bg-transparent px-3 py-3 text-base outline-none ${errors[key] ? "border-terracotta" : "border-limestone"}`}
+        className={`field mt-2 ${errors[key] ? "border-terracotta" : ""}`}
       />
       {errors[key] ? <span className="mt-1 block text-sm text-charcoal">{errors[key]}</span> : null}
     </label>
@@ -85,12 +86,13 @@ export function ProcurementForm() {
           rows={4}
           value={values.message}
           onChange={(event) => setValues((current) => ({ ...current, message: event.target.value }))}
-          className="mt-2 w-full border border-limestone bg-transparent px-3 py-3 text-base outline-none"
+          className="field mt-2"
         />
       </label>
       {formError ? <p className="text-sm text-charcoal">{formError}</p> : null}
-      <button type="submit" disabled={pending} className="bg-charcoal px-5 py-3 text-sm text-ivory disabled:opacity-60">
+      <button type="submit" disabled={pending} className="btn-primary">
         {pending ? "Sending…" : "Request the bid pack"}
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </button>
     </form>
   );

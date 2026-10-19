@@ -29,7 +29,7 @@ export default async function InsightsPage() {
           {insights.map((insight) => (
             <li key={insight.id} className="border-b border-limestone">
               <Link href={`/insights/${insight.slug}`} className="grid gap-6 py-8 md:grid-cols-12">
-                <div className="relative aspect-[3/2] border border-limestone md:col-span-4">
+                <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-limestone md:col-span-4">
                   <Image
                     src={imageForInsight(insight.slug)}
                     alt={altFor(imageForInsight(insight.slug), insight.title)}

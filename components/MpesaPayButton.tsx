@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Phone } from "lucide-react";
 import { site } from "@/content/site";
 import { fieldErrors, mpesaSchema } from "@/lib/validation";
 
@@ -46,7 +47,7 @@ export function MpesaPayButton({
   }
 
   return (
-    <form onSubmit={onSubmit} className="border border-limestone p-6" noValidate>
+    <form onSubmit={onSubmit} className="rounded-2xl border border-limestone p-6" noValidate>
       <p className="meta text-muted">Consultation and small works</p>
       <h3 className="mt-3 font-display text-3xl tracking-tight">Pay the consultation fee</h3>
       <p className="mt-3 text-base leading-relaxed">
@@ -60,12 +61,13 @@ export function MpesaPayButton({
           onChange={(event) => setPhone(event.target.value)}
           inputMode="tel"
           autoComplete="tel"
-          className={`mt-2 w-full border bg-transparent px-3 py-3 outline-none ${error ? "border-terracotta" : "border-limestone"}`}
+          className={`field mt-2 ${error ? "border-terracotta" : ""}`}
         />
       </label>
       {error ? <p className="mt-2 text-sm text-charcoal">{error}</p> : null}
       {message ? <p className="mt-2 text-sm text-charcoal">{message}</p> : null}
-      <button type="submit" disabled={pending} className="mt-6 bg-charcoal px-5 py-3 text-sm text-ivory disabled:opacity-60">
+      <button type="submit" disabled={pending} className="btn-primary mt-6">
+        <Phone className="h-4 w-4" aria-hidden="true" />
         {pending ? "Sending the prompt…" : "Pay consultation fee"}
       </button>
       <p className="mt-4 text-sm leading-relaxed text-muted">

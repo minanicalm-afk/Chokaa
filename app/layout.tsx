@@ -1,16 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { site } from "@/content/site";
 import "./globals.css";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-fraunces",
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +13,7 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#F7F3EC",
+  themeColor: "#FFFFFF",
   colorScheme: "light",
 };
 
@@ -73,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-KE" className={`${fraunces.variable} ${inter.variable}`}>
+    <html lang="en-KE" className={inter.variable}>
       <body className="flex min-h-screen flex-col">
         <a href="#content" className="skip-link">
           Skip to content

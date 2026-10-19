@@ -46,7 +46,7 @@ export default async function ServicesPage() {
               key={service.id}
               className="group grid items-center gap-8 border-t border-limestone py-12 lg:grid-cols-12 lg:py-16"
             >
-              <div className={`relative aspect-[16/10] border border-limestone lg:col-span-7 ${imageFirst ? "" : "lg:order-2"}`}>
+              <div className={`relative aspect-[16/10] overflow-hidden rounded-2xl border border-limestone lg:col-span-7 ${imageFirst ? "" : "lg:order-2"}`}>
                 <Image
                   src={image}
                   alt={altFor(image, service.name)}
@@ -65,7 +65,7 @@ export default async function ServicesPage() {
                 <p className="mt-4 text-sm text-charcoal">{service.costRange}</p>
                 <Link
                   href={`/services/${service.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm underline decoration-terracotta underline-offset-4"
+                  className="btn-line mt-6"
                 >
                   View service
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />

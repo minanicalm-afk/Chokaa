@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { budgetBands, projectTypes, timelines } from "@/content/catalog";
 import { site, whatsappHref } from "@/content/site";
 import { fieldErrors, quoteSchema, type QuoteInput } from "@/lib/validation";
@@ -59,7 +60,7 @@ export function QuoteForm({ sourcePage }: { sourcePage: string }) {
 
   if (done) {
     return (
-      <div className="border border-limestone p-6">
+      <div className="rounded-2xl border border-limestone p-6">
         <p className="font-display text-3xl tracking-tight">Asante. We’ll respond within one business day.</p>
         <p className="mt-4 text-muted">If the matter is urgent, WhatsApp is the faster desk.</p>
         <a href={whatsappHref()} className="mt-6 inline-block text-sm underline decoration-terracotta underline-offset-4">
@@ -112,8 +113,9 @@ export function QuoteForm({ sourcePage }: { sourcePage: string }) {
         <textarea value={values.message} onChange={(event) => update("message", event.target.value)} rows={5} className={inputClass(errors.message)} />
       </Field>
       {formError ? <p className="text-sm text-charcoal">{formError}</p> : null}
-      <button type="submit" disabled={pending} className="bg-charcoal px-5 py-3 text-sm text-ivory disabled:opacity-60">
+      <button type="submit" disabled={pending} className="btn-primary">
         {pending ? "Sending…" : "Request a quote"}
+        <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </button>
     </form>
   );
@@ -143,5 +145,5 @@ function Field({
 }
 
 function inputClass(error?: string) {
-  return `w-full border bg-transparent px-3 py-3 text-base outline-none ${error ? "border-terracotta" : "border-limestone"}`;
+  return `field ${error ? "border-terracotta" : ""}`;
 }

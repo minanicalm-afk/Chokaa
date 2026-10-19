@@ -45,7 +45,7 @@ export function BeforeAfterSlider({
         aria-valuemax={100}
         aria-valuenow={Math.round(value)}
         aria-label="Before and after. Left is before, right is after."
-        className="relative aspect-[4/3] cursor-ew-resize touch-none select-none border border-limestone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
+        className="relative aspect-[4/3] cursor-ew-resize touch-none select-none overflow-hidden rounded-2xl border border-limestone focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
         onPointerDown={(event) => {
           event.currentTarget.setPointerCapture(event.pointerId);
           setFromClientX(event.clientX);

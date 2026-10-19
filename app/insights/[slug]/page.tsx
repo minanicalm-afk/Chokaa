@@ -40,7 +40,7 @@ export default async function InsightPage({ params }: { params: Params }) {
           <p className="meta mt-6 text-muted">
             {site.name} · {formatDate(insight.publishedAt)} · {insight.readingTime} min read
           </p>
-          <div className="relative mt-8 aspect-[3/2] border border-limestone">
+          <div className="relative mt-8 aspect-[3/2] overflow-hidden rounded-2xl border border-limestone">
             <Image
               src={imageForInsight(insight.slug)}
               alt={altFor(imageForInsight(insight.slug), insight.title)}
@@ -61,7 +61,7 @@ export default async function InsightPage({ params }: { params: Params }) {
           <p className="mt-3 text-muted">
             A quote from this page is marked so we know which note you were reading.
           </p>
-          <Link href="/contact" className="mt-6 inline-block bg-charcoal px-5 py-3 text-sm text-ivory">
+          <Link href="/contact" className="btn-primary mt-6">
             Request a quote
           </Link>
         </aside>

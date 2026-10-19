@@ -33,7 +33,7 @@ export default function ProcurementPage() {
         </p>
 
         <div className="mt-10 grid items-end gap-8 lg:grid-cols-12">
-          <div className="relative aspect-[3/2] border border-limestone lg:col-span-7">
+          <div className="relative aspect-[3/2] overflow-hidden rounded-2xl border border-limestone lg:col-span-7">
             <Image
               src="/images/nakuru-road.jpg"
               alt={altFor("/images/nakuru-road.jpg", "Access road and drain")}
@@ -47,7 +47,7 @@ export default function ProcurementPage() {
             <p className="text-sm leading-relaxed text-muted">
               Civil works, houses, and fit-outs. The photograph is an access road and drain of the kind named in a typical civil bill.
             </p>
-            <Link href={site.capabilityStatementHref} className="mt-6 inline-block bg-charcoal px-5 py-3 text-sm text-ivory">
+            <Link href={site.capabilityStatementHref} className="btn-primary mt-6">
               Open the capability statement
             </Link>
           </div>

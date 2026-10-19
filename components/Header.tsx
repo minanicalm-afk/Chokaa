@@ -3,8 +3,26 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import {
+  ArrowRight,
+  BookOpen,
+  Building2,
+  ClipboardList,
+  Hammer,
+  LayoutGrid,
+  Menu,
+  X,
+} from "lucide-react";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
+
+const navIcons = {
+  "/work": LayoutGrid,
+  "/services": Hammer,
+  "/about": Building2,
+  "/insights": BookOpen,
+  "/procurement": ClipboardList,
+} as const;
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -28,9 +46,7 @@ export function Header() {
     const root = headerRef.current;
     const focusable = () =>
       Array.from(
-        root?.querySelectorAll<HTMLElement>(
-          "a[href], button:not([disabled])",
-        ) ?? [],
+        root?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? [],
       ).filter((element) => element.getClientRects().length > 0);
 
     panelRef.current?.querySelector<HTMLElement>("a[href]")?.focus();
@@ -78,19 +94,14 @@ export function Header() {
   }, []);
 
   return (
-    <header ref={headerRef} className="sticky top-0 z-50 bg-ivory">
-      <div className="relative z-50 border-b border-limestone bg-ivory">
-        <div className="shell flex items-center justify-between gap-6 py-4">
-          <Link href="/" className="min-w-0" aria-label={site.name}>
-            <span className="block font-display text-xl leading-none tracking-tight">
-              {site.name}
-            </span>
-            <span className="meta mt-1.5 hidden text-muted sm:block">
-              {site.address.city} · Est. {site.established}
-            </span>
+    <header ref={headerRef} className="sticky top-0 z-50">
+      <div className="relative z-50 border-b border-limestone bg-white/90 backdrop-blur-md">
+        <div className="shell flex h-16 items-center justify-between gap-4">
+          <Link href="/" className="font-display text-lg font-semibold tracking-tight" aria-label={site.name}>
+            {site.name}
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
             {site.nav.map((item) => {
               const active = isActive(pathname, item.href);
               return (
@@ -99,8 +110,8 @@ export function Header() {
                   href={item.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "text-sm text-charcoal underline decoration-terracotta decoration-1 underline-offset-[10px]",
-                    active ? "underline" : "no-underline hover:underline",
+                    "rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                    active ? "bg-[#F3F3F3] text-charcoal" : "text-muted hover:bg-[#F7F7F7] hover:text-charcoal",
                   )}
                 >
                   {item.label}
@@ -109,22 +120,21 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center gap-5">
-            <Link
-              href="/contact"
-              className="hidden text-sm text-charcoal underline decoration-terracotta decoration-1 underline-offset-4 sm:inline"
-            >
+          <div className="flex items-center gap-2">
+            <Link href="/contact" className="btn-primary hidden sm:inline-flex">
               Request a quote
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <button
               ref={menuButtonRef}
               type="button"
-              className="text-sm text-charcoal lg:hidden"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-limestone text-charcoal lg:hidden"
               aria-expanded={open}
               aria-controls={panelId}
               onClick={() => setOpen((value) => !value)}
             >
-              {open ? "Close" : "Menu"}
+              {open ? <X className="h-4 w-4" aria-hidden="true" /> : <Menu className="h-4 w-4" aria-hidden="true" />}
+              <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             </button>
           </div>
         </div>
@@ -137,46 +147,36 @@ export function Header() {
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
-          className="fixed inset-0 z-40 overflow-y-auto bg-ivory lg:hidden"
+          className="fixed inset-0 z-40 overflow-y-auto bg-white lg:hidden"
         >
-          <div className="shell pb-16 pt-28">
-            <p className="meta text-muted">Index</p>
-            <nav aria-label="Mobile" className="mt-6">
-              <ol>
-                {site.nav.map((item, index) => {
+          <div className="shell flex min-h-full flex-col pb-10 pt-24">
+            <nav aria-label="Mobile">
+              <ul className="space-y-1">
+                {site.nav.map((item) => {
                   const active = isActive(pathname, item.href);
+                  const Icon = navIcons[item.href as keyof typeof navIcons];
                   return (
-                    <li key={item.href} className="border-t border-limestone">
+                    <li key={item.href}>
                       <Link
                         href={item.href}
                         aria-current={active ? "page" : undefined}
-                        className="flex items-baseline gap-4 py-4"
+                        className={cn(
+                          "flex items-center gap-3 rounded-2xl px-3 py-3.5 text-lg font-medium",
+                          active ? "bg-[#F3F3F3]" : "hover:bg-[#F7F7F7]",
+                        )}
                       >
-                        <span className="meta w-8 text-muted">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span className="font-display text-4xl tracking-tight">
-                          {item.label}
-                        </span>
+                        <Icon className="h-5 w-5 text-muted" aria-hidden="true" />
+                        {item.label}
                       </Link>
                     </li>
                   );
                 })}
-                <li className="border-t border-limestone">
-                  <Link
-                    href="/contact"
-                    className="flex items-baseline gap-4 py-4"
-                  >
-                    <span className="meta w-8 text-muted">
-                      {String(site.nav.length + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-display text-4xl tracking-tight">
-                      Request a quote
-                    </span>
-                  </Link>
-                </li>
-              </ol>
+              </ul>
             </nav>
+            <Link href="/contact" className="btn-primary mt-8 w-full">
+              Request a quote
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       ) : null}

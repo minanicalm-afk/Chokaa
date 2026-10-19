@@ -20,7 +20,7 @@ export default function ProjectMap({ projects }: { projects: WorkProject[] }) {
   );
 
   return (
-    <div className="relative isolate z-0 h-[32rem] border border-limestone">
+    <div className="relative isolate z-0 h-[32rem] overflow-hidden rounded-2xl border border-limestone">
       <MapContainer
         center={[0.15, 37.4]}
         zoom={6}
@@ -38,7 +38,7 @@ export default function ProjectMap({ projects }: { projects: WorkProject[] }) {
             icon={pin}
           >
             <Popup>
-              <span className="block font-serif text-base text-charcoal">{project.name}</span>
+              <span className="block font-sans text-base text-charcoal">{project.name}</span>
               <span className="mt-1 block text-xs text-neutral-600">
                 {sectorLabel(project.sector)} · {project.location}
               </span>

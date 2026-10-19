@@ -10,15 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        charcoal: "#1F1D1B",
-        ivory: "#F7F3EC",
-        limestone: "#E8E1D5",
+        charcoal: "#141414",
+        ivory: "#FFFFFF",
+        limestone: "#E6E6E6",
         terracotta: "#B5623C",
         ochre: "#C99B5B",
-        muted: "#6B645C",
+        muted: "#5E5E5E",
       },
       fontFamily: {
-        display: ["var(--font-fraunces)", "Georgia", "serif"],
+        display: ["var(--font-inter)", "system-ui", "sans-serif"],
         body: ["var(--font-inter)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },

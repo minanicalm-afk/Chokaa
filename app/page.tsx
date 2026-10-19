@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { CredentialStrip } from "@/components/CredentialStrip";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -49,11 +50,13 @@ export default async function HomePage() {
             </h1>
             <div className="rule-draw mt-6 h-px w-40 bg-terracotta" aria-hidden="true" />
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/work" className="border border-charcoal px-5 py-3 text-sm text-charcoal">
+              <Link href="/work" className="btn-line">
                 View our work
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
-              <Link href="/contact" className="bg-terracotta px-5 py-3 text-lg font-bold leading-none text-ivory">
+              <Link href="/contact" className="btn-primary">
                 Request a quote
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
           </div>
@@ -170,7 +173,7 @@ export default async function HomePage() {
               alt={altFor("/images/site-foundation.jpg", "Foundation on red soil")}
               width={1200}
               height={675}
-              className="h-auto w-full border border-limestone object-cover"
+              className="h-auto w-full rounded-2xl border border-limestone object-cover"
             />
           </div>
           <div className="flex flex-col justify-end md:col-span-6 md:col-start-7">
@@ -181,10 +184,12 @@ export default async function HomePage() {
               Start with the plot and the band you have in mind. We will tell you, plainly, whether we are the right contractor.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <Link href="/contact" className="bg-charcoal px-5 py-3 text-sm text-ivory">
+              <Link href="/contact" className="btn-primary">
                 Start a conversation
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
-              <a href={whatsappHref()} className="px-1 py-3 text-sm underline decoration-terracotta underline-offset-4">
+              <a href={whatsappHref()} className="btn-line">
+                <WhatsAppIcon className="h-4 w-4" />
                 WhatsApp
               </a>
             </div>

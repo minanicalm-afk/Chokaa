@@ -98,7 +98,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
           {project.gallery.length > 0 ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:col-span-12">
               {project.gallery.map((src) => (
-                <div key={src} className="relative aspect-[4/3] border border-limestone">
+                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-limestone">
                   <Image
                     src={src}
                     alt={altFor(src, `${project.name}, ${project.location}`)}
@@ -133,7 +133,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
             <p className="mt-3 max-w-xl text-muted">
               Tell us the place and the band. We will say whether it sits in the work we do.
             </p>
-            <Link href="/contact" className="mt-6 inline-block bg-charcoal px-5 py-3 text-sm text-ivory">
+            <Link href="/contact" className="btn-primary mt-6">
               Request a quote
             </Link>
           </div>
